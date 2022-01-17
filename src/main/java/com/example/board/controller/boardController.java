@@ -1,5 +1,8 @@
 package com.example.board.controller;
 
+import com.example.board.model.Entity.boardEntity;
+import com.example.board.model.Response.boardResponse;
+import com.example.board.service.boardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -7,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BoardController {
-
-    private final BoardService service;
+public class boardController {
+    private  boardService boardservice;
 
     @GetMapping(path = "/")
     public String board() {
@@ -17,9 +19,9 @@ public class BoardController {
     }
 
     @PostMapping
-    public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
+    public ResponseEntity<boardResponse> create(@RequestBody BoardRequest.boardRequest request) {
         System.out.println("CREATE");
-        if (ObjectUtils.isEmpty(request.getTitle()))
+        if (ObjectUtils.isEmpty(request.getboardTitle()))
             return ResponseEntity.badRequest().build();
 
         if (ObjectUtils.isEmpty(request.getOrder()))
@@ -28,44 +30,47 @@ public class BoardController {
         if (ObjectUtils.isEmpty(request.getCompleted()))
             request.setCompleted(false);
 
-        TodoEntity result = this.service.add(request);
-        return ResponseEntity.ok(new TodoResponse(result));
+        BoardEntity.boardEntity result = this.boardservice.add(request);
+        return ResponseEntity.ok(new boardResponse.boardResponse(result));
     }
 
     @GetMapping(path = "/todo/{id}")
-    public ResponseEntity<TodoResponse> readOne(@PathVariable Long id) {
+    public ResponseEntity<boardResponse.boardResponse> readOne(@PathVariable Long id) {
         System.out.println("READ ONE");
-        TodoEntity result = this.service.searchById(id);
-        return ResponseEntity.ok(new TodoResponse(result));
+        BoardEntity.boardEntity result = this.boardservice.searchById(id);
+        return ResponseEntity.ok(new boardResponse.boardResponse(result));
     }
 
     @GetMapping(path = "/todolist")
-    public ResponseEntity<List<TodoResponse>> readAll() {
+    public ResponseEntity<List<boardResponse>> readAll() {
         System.out.println("READ ALL");
-        List<TodoEntity> list = this.service.searchAll();
-        List<TodoResponse> response = list.stream().map(TodoResponse::new)
+        List<BoardEntity> list = this.boardservice.searchAll();
+        List<boardResponse> response = list.stream().map(boardResponse::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping(path = "/todo/{id}")
-    public ResponseEntity<TodoEntity> update(@PathVariable Long id, @RequestBody TodoRequest request) {
+    public ResponseEntity<BoardEntity> update(@PathVariable Long id, @RequestBody BoardRequest request) {
         System.out.println("UPDATE");
-        TodoEntity result = this.service.updateById(id, request);
+        BoardEntity result = this.boardservice.updateById(id, request);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping(path = "/todo/{id}")
     public ResponseEntity<?> deleteOne(@PathVariable Long id) {
         System.out.println("DELETE ONE");
-        List<TodoEntity> result = service.deleteById(id);
+        List<boardEntity> result = boardservice.deleteById(id);
         return  ResponseEntity.ok(result);
     }
 
     @DeleteMapping(path = "/")
     public ResponseEntity<?> deleteAll() {
         System.out.println("DELETE ALL");
-        this.service.deleteAll();
+        this.boardservice.deleteAll();
         return ResponseEntity.ok().build();
     }
 }
+
+
+

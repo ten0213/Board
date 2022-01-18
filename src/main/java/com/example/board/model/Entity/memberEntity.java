@@ -16,4 +16,30 @@ public class memberEntity {
 
     @Column(nullable = false)
     private String memberPw;
+
+    public int getMemberNo() {
+        return memberNo;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public String getMemberPw() {
+        return memberPw;
+    }
+
+
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public void setMemberPw(String memberPw) {
+        this.memberPw = memberPw;
+    }
+
 }

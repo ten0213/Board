@@ -1,6 +1,7 @@
 package com.example.board.controller;
 
 import com.example.board.model.Entity.boardEntity;
+import com.example.board.model.Request.boardRequest;
 import com.example.board.model.Response.boardResponse;
 import com.example.board.service.boardService;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,12 @@ public class boardController {
     }
 
     @PostMapping
-    public ResponseEntity<boardResponse> create(@RequestBody BoardRequest.boardRequest request) {
+    public ResponseEntity<boardResponse> create(@RequestBody boardRequest request) {
         System.out.println("CREATE");
-        if (ObjectUtils.isEmpty(request.getboardTitle()))
+        if (ObjectUtils.isEmpty(request.getBoardTitle()))
             return ResponseEntity.badRequest().build();
 
-        if (ObjectUtils.isEmpty(request.getOrder()))
+        if (ObjectUtils.isEmpty(request.getBoardContent()))
             request.setOrder(0L);
 
         if (ObjectUtils.isEmpty(request.getCompleted()))

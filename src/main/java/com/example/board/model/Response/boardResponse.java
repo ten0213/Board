@@ -4,7 +4,6 @@ package com.example.board.model.Response;
 import com.example.board.model.Entity.boardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -30,7 +29,7 @@ public class boardResponse {
         this.memberNo = boardentity.getMemberNo();
         this.commentNo = Integer.parseInt(boardentity.getCommentNo());
         this.attachmentNo = Integer.parseInt(boardentity.getAttachmentNo());
-        this.isDelete = boardEntity.getisDelete();
+        this.isDelete = boardentity.getIsDelete();
 
         this.boardUrl = "http://localhost:8080/" + this.boardNo;
     }

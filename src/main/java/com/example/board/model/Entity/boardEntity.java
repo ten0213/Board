@@ -34,8 +34,7 @@ public class boardEntity {
     @Column(nullable = false)
     private boolean isDelete;
 
-    public static boolean getisDelete() {
-    }
+    public boolean getIsDelete() { return isDelete; }
 
 
     public String getBoardTitle() {
@@ -66,9 +65,6 @@ public class boardEntity {
         return attachmentNo;
     }
 
-    public boolean isDelete() {
-        return isDelete;
-    }
 
     public int getBoardNo() {
         return boardNo;
@@ -107,7 +103,7 @@ public class boardEntity {
         this.attachmentNo = attachmentNo;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setDelete(boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.board.model.Response;
 
-import com.example.board.model.Entity.boardEntity;
+import com.example.board.model.Entity.attachmentEntity;
 
 public class attachmentResponse {
     private int attachmentNo;
@@ -9,11 +9,13 @@ public class attachmentResponse {
     private String attachmentContent;
     private String attachmentUrl;
 
-    public attachmentResponse(boardEntity) {
-        this.attachmentNo = boardEntity.getattachmentNo();
-        this.attachmentNickname = boardEntity.getattachmentNickname();
-        this.attachmentPw = boardEntity.getattachmentPw();
-        this.attachmentContent = boardEntity.getattachmentContent();
+
+
+    public attachmentResponse(attachmentEntity attachmententity) {
+        this.attachmentNo = attachmententity.getAttachmentNo();
+        this.attachmentNickname = attachmententity.getAttachmentNickname();
+        this.attachmentPw = attachmententity.getAttachmentPw();
+        this.attachmentContent = attachmententity.getAttachmentContent();
 
         this.attachmentUrl = "http://localhost:8080/" + this.attachmentNo;
 

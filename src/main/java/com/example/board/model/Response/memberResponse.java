@@ -1,6 +1,7 @@
 package com.example.board.model.Response;
 
 import com.example.board.model.Entity.boardEntity;
+import com.example.board.model.Entity.memberEntity;
 
 public class memberResponse {
     private int memberNo;
@@ -8,10 +9,13 @@ public class memberResponse {
     private String memberPw;
     private String memberUrl;
 
-    public memberResponse(boardEntity) {
-        this.memberNo = boardEntity.getmemberId();
-        this.memberName = boardEntity.getmemberName();
-        this.memberPw = boardEntity.getmemberPw();
+
+
+
+    public memberResponse(memberEntity memberentity) {
+        this.memberNo = memberentity.getMemberNo();
+        this.memberName = memberentity.getMemberName();
+        this.memberPw = memberentity.getMemberPw();
 
         this.memberUrl = "http://localhost:8080/" + this.memberNo;
     }

@@ -16,7 +16,7 @@ public class boardRequest {
 
     private String updateDt;
 
-    private String boardContents;
+    private String boardContent;
 
     private boolean isDelete;
 

@@ -1,74 +1,73 @@
 package com.example.board.service;
 
-import com.example.board.model.Entity.BoardEntity;
+import java.util.List;
 
-import com.example.board.model.Request.BoardRequest;
-
+import com.example.board.model.Entity.boardEntity;
+import com.example.board.model.Request.boardRequest;
 import com.example.board.repository.boardRepository;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
-@Service
 @AllArgsConstructor
+@Service
 public class boardService {
-    public boardRepository.boardRepository boardrepository;
+    private final boardRepository boardRepository;
 
-    @GetMapping
-    public BoardEntity.boardEntity add(BoardRequest.boardRequest request) {
-        BoardEntity.boardEntity boardEntity = new BoardEntity.boardEntity();
-        boardEntity.setboardTitle(request.getboardTitle());
-        boardEntity.setOrder(request.getOrder());
-        boardEntity.setCompleted(request.getCompleted());
-        // <S extends T> S save(S entity);
-        // save는 제네릭으로 받은 타입(T)으로 값을 반환
-        return this.boardrepository.save(boardEntity);
+    // 게시판 목록에 게시글을 추가
+    public boardEntity add(boardRequest request) {
+        boardEntity boardEntity = new boardEntity();
+        boardEntity.setBoardContent(request.getBoardContent());
+        boardEntity.setWriter(request.getWriter());
+        boardEntity.setBoardTitle(request.getBoardTitle());
+        boardEntity.setCreateDt(request.getCreateDt());
+        boardEntity.setUpdateDt(request.getUpdateDt());
+
+        return this.boardRepository.save(boardEntity);
     }
-    //    2	todo  리스트 목록 중 특정 아이템을 조회
-    public BoardEntity.boardEntity searchById(Long id) {
-        return  this.boardrepository.findById(id)
+
+    public boardEntity searchById(Integer idx) {
+        return this.boardRepository.findById(idx)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-    }
-    //    3	todo 리스트 전체 목록을 조회
-    public List<BoardEntity.boardEntity> searchAll() {
-        return this.boardrepository.findAll();
-    }
-    //    4	todo 리스트 목록 중 특정 아이템을 수정
-    public BoardEntity updateById(Long id, BoardRequest request) {
-        BoardEntity.boardEntity boardEntity = this.searchById(id);
-
-        if(request.getTitle() != null) {
-            boardEntity.setTitle(request.getTitle());
-        }
-        if(request.getOrder() != null) {
-            boardEntity.setOrder(request.getOrder());
-        }
-        if(request.getCompleted() != null) {
-            boardEntity.setCompleted(request.getCompleted());
-        }
-        return this.boardrepository.save(boardEntity);
     }
 
+    public List<boardEntity> searchAll() {
+        return this.boardRepository.findAll();
+    }
 
-    //    5	todo 리스트 목록 중 특정 아이템을 삭제
+    public boardEntity updateById(Integer idx, boardRequest request) {
+        boardEntity boardEntity = this.searchById(idx);
+        if(request.getBoardTitle() != null) {
+            boardEntity.setBoardTitle(request.getBoardTitle());
+        }
+
+        if(request.getBoardContent() != null) {
+            boardEntity.setBoardContent(request.getBoardContent());
+        }
+
+        if(request.getWriter() != null) {
+            boardEntity.setWriter(request.getWriter());
+        }
+        if(request.getCreateDt() != null) {
+            boardEntity.setCreateDt(request.getCreateDt());
+        }
+
+        if(request.getUpdateDt() != null) {
+            boardEntity.setUpdateDt(request.getUpdateDt());
+        }
+
+        return this.boardRepository.save(boardEntity);
+    }
+
     @Transactional
-    public List<BoardEntity> deleteById(Long id) {
-        this.boardrepository.deleteById(id);
-        return boardrepository.findAll();
+    public List<boardEntity> deleteById(Integer id) {
+        this.boardRepository.deleteById(id);
+        return boardRepository.findAll();
     }
-    //    6	todo 리스트 전체 목록을 삭제
+
     public void deleteAll() {
-        this.boardrepository.deleteAll();
+        this.boardRepository.deleteAll();
     }
-
-
 }
-

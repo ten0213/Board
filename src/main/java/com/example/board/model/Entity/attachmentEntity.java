@@ -1,15 +1,19 @@
 package com.example.board.model.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@NoArgsConstructor
 public class attachmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int attachmentNo;
+    private int attachmentId;
 
     @Column(nullable = false)
     private String attachmentNickname;
@@ -20,37 +24,5 @@ public class attachmentEntity {
     @Column(nullable = false)
     private String attachmentContent;
 
-    public int getAttachmentNo() {
-        return attachmentNo;
-    }
-
-    public String getAttachmentNickname() {
-        return attachmentNickname;
-    }
-
-    public String getAttachmentPw() {
-        return attachmentPw;
-    }
-
-    public String getAttachmentContent() {
-        return attachmentContent;
-    }
-
-
-    public void setAttachmentNo(int attachmentNo) {
-        this.attachmentNo = attachmentNo;
-    }
-
-    public void setAttachmentNickname(String attachmentNickname) {
-        this.attachmentNickname = attachmentNickname;
-    }
-
-    public void setAttachmentPw(String attachmentPw) {
-        this.attachmentPw = attachmentPw;
-    }
-
-    public void setAttachmentContent(String attachmentContent) {
-        this.attachmentContent = attachmentContent;
-    }
 
 }

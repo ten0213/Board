@@ -1,8 +1,15 @@
 package com.example.board.model.Request;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class memberRequest {
 
-    private int memberNo;
+    private int memberId;
+
     private String memberName;
+
     private String memberPw;
 }

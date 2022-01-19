@@ -1,24 +1,29 @@
 package com.example.board.model.Request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Getter
+@Setter
 public class boardRequest {
+
+    private Long boardIdx;
 
     private String boardTitle;
 
-    private String createDt;
+    private String writer;
 
-    private String updateDt;
+    private LocalDateTime createDt;
+
+    private LocalDateTime updateDt;
 
     private String boardContent;
 
-    private boolean isDelete;
+    private Boolean isDelete;
 
 }
 

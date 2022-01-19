@@ -4,15 +4,26 @@ import com.example.board.model.Entity.boardEntity;
 import com.example.board.model.Request.boardRequest;
 import com.example.board.model.Response.boardResponse;
 import com.example.board.service.boardService;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
+@CrossOrigin
+@AllArgsConstructor
+@Controller
 public class boardController {
-    private  boardService boardservice;
+
+    private boardService boardservice;
 
     @GetMapping(path = "/")
     public String board() {
@@ -22,47 +33,53 @@ public class boardController {
     @PostMapping
     public ResponseEntity<boardResponse> create(@RequestBody boardRequest request) {
         System.out.println("CREATE");
-        if (ObjectUtils.isEmpty(request.getBoardTitle()))
+        if(ObjectUtils.isEmpty(request.getBoardTitle()))
             return ResponseEntity.badRequest().build();
 
-        if (ObjectUtils.isEmpty(request.getBoardContent()))
-            request.setOrder(0L);
+        if(ObjectUtils.isEmpty(request.getBoardContent()))
+            return ResponseEntity.badRequest().build();
 
-        if (ObjectUtils.isEmpty(request.getCompleted()))
-            request.setCompleted(false);
+        if(ObjectUtils.isEmpty(request.getCreateDt()))
+            return ResponseEntity.badRequest().build();
 
-        BoardEntity.boardEntity result = this.boardservice.add(request);
-        return ResponseEntity.ok(new boardResponse.boardResponse(result));
+        if(ObjectUtils.isEmpty(request.getUpdateDt()))
+            return ResponseEntity.badRequest().build();
+
+        if(ObjectUtils.isEmpty(request.getIsDelete()))
+            request.setIsDelete(false);
+
+        boardEntity result = this.boardservice.add(request);
+        return ResponseEntity.ok(new boardResponse(result));
     }
 
-    @GetMapping(path = "/todo/{id}")
-    public ResponseEntity<boardResponse.boardResponse> readOne(@PathVariable Long id) {
+    @GetMapping(path = "/board/{idx}")
+    public ResponseEntity<boardResponse> readOne(@PathVariable Integer idx) {
         System.out.println("READ ONE");
-        BoardEntity.boardEntity result = this.boardservice.searchById(id);
-        return ResponseEntity.ok(new boardResponse.boardResponse(result));
+        boardEntity result = this.boardservice.searchById(idx);
+        return ResponseEntity.ok(new boardResponse(result));
     }
 
-    @GetMapping(path = "/todolist")
+    @GetMapping(path = "/board")
     public ResponseEntity<List<boardResponse>> readAll() {
         System.out.println("READ ALL");
-        List<BoardEntity> list = this.boardservice.searchAll();
+        List<boardEntity> list = this.boardservice.searchAll();
         List<boardResponse> response = list.stream().map(boardResponse::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping(path = "/todo/{id}")
-    public ResponseEntity<BoardEntity> update(@PathVariable Long id, @RequestBody BoardRequest request) {
+    @PatchMapping(path = "/board/{idx}")
+    public ResponseEntity<boardEntity> update(@PathVariable Integer idx, @RequestBody boardRequest request) {
         System.out.println("UPDATE");
-        BoardEntity result = this.boardservice.updateById(id, request);
+        boardEntity result = this.boardservice.updateById(idx, request);
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping(path = "/todo/{id}")
-    public ResponseEntity<?> deleteOne(@PathVariable Long id) {
+    @DeleteMapping(path = "/board/{idx}")
+    public ResponseEntity<?> deleteOne(@PathVariable Integer idx) {
         System.out.println("DELETE ONE");
-        List<boardEntity> result = boardservice.deleteById(id);
-        return  ResponseEntity.ok(result);
+        List<boardEntity> result = boardservice.deleteById(idx);
+        return ResponseEntity.ok(result);
     }
 
     @DeleteMapping(path = "/")
@@ -71,6 +88,8 @@ public class boardController {
         this.boardservice.deleteAll();
         return ResponseEntity.ok().build();
     }
+
+
 }
 
 

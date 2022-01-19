@@ -2,14 +2,15 @@ package com.example.board.model.Response;
 
 
 import com.example.board.model.Entity.boardEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
+
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class boardResponse {
 
-    private Long boardNo;
+    private Long boardIdx;
     private String boardTitle;
     private String createDt;
     private String updateDt;
@@ -17,21 +18,22 @@ public class boardResponse {
     private int memberNo;
     private int commentNo;
     private int attachmentNo;
-    private boolean isDelete;
+    private Boolean isDelete;
+    private String writer;
     private String boardUrl;
 
     public boardResponse(boardEntity boardentity) {
-        this.boardNo = (long) boardentity.getBoardNo();
+        this.boardIdx = (long) boardentity.getBoardIdx();
         this.boardTitle = boardentity.getBoardTitle();
-        this.createDt = boardentity.getCreateDt();
-        this.updateDt = boardentity.getUpdateDt();
+        this.createDt = String.valueOf(boardentity.getCreateDt());
+        this.updateDt = String.valueOf(boardentity.getUpdateDt());
         this.boardContent = boardentity.getBoardContent();
-        this.memberNo = boardentity.getMemberNo();
-        this.commentNo = Integer.parseInt(boardentity.getCommentNo());
-        this.attachmentNo = Integer.parseInt(boardentity.getAttachmentNo());
-        this.isDelete = boardentity.getIsDelete();
-
-        this.boardUrl = "http://localhost:8080/" + this.boardNo;
+        this.memberNo = boardentity.getMemberIdx();
+        this.commentNo = Integer.parseInt(boardentity.getCommentIdx());
+        this.attachmentNo = Integer.parseInt(boardentity.getAttachmentIdx());
+        this.isDelete = Boolean.parseBoolean(String.valueOf(boardentity.getIsDelete()));
+        this.writer = boardentity.getWriter();
+        this.boardUrl = "http://localhost:8080/" + this.boardIdx;
     }
 
 

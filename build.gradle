@@ -6,7 +6,6 @@ plugins {
 
 group = 'com.example.board'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = '11'
 
 
 

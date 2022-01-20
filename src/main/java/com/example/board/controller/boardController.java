@@ -7,6 +7,7 @@ import com.example.board.service.boardService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Getter
 @Setter
 @CrossOrigin
@@ -33,10 +33,14 @@ public class boardController {
     @PostMapping
     public ResponseEntity<boardResponse> create(@RequestBody boardRequest request) {
         System.out.println("CREATE");
+
+        if(ObjectUtils.isEmpty(request.getBoardIdx()))
+            return ResponseEntity.badRequest().build();
+
         if(ObjectUtils.isEmpty(request.getBoardTitle()))
             return ResponseEntity.badRequest().build();
 
-        if(ObjectUtils.isEmpty(request.getBoardContent()))
+        if(ObjectUtils.isEmpty(request.getBoardContents()))
             return ResponseEntity.badRequest().build();
 
         if(ObjectUtils.isEmpty(request.getCreateDt()))
@@ -45,8 +49,8 @@ public class boardController {
         if(ObjectUtils.isEmpty(request.getUpdateDt()))
             return ResponseEntity.badRequest().build();
 
-        if(ObjectUtils.isEmpty(request.getIsDelete()))
-            request.setIsDelete(false);
+        if(ObjectUtils.isEmpty(request.getBoardIsDelete()))
+            request.setBoardIsDelete(false);
 
         boardEntity result = this.boardservice.add(request);
         return ResponseEntity.ok(new boardResponse(result));
@@ -81,14 +85,6 @@ public class boardController {
         List<boardEntity> result = boardservice.deleteById(idx);
         return ResponseEntity.ok(result);
     }
-
-    @DeleteMapping(path = "/")
-    public ResponseEntity<?> deleteAll() {
-        System.out.println("DELETE ALL");
-        this.boardservice.deleteAll();
-        return ResponseEntity.ok().build();
-    }
-
 
 }
 

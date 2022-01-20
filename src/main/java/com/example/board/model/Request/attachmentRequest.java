@@ -1,14 +1,11 @@
 package com.example.board.model.Request;
 
+import lombok.*;
 
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class attachmentRequest {
@@ -17,7 +14,10 @@ public class attachmentRequest {
 
     private String attachmentNickname;
 
-    private String attachmentPw;
+    private String attachmentLength;
 
-    private String attachmentContent;
+    private String attachmentUrl;
+
+    private Boolean attachmentIsDelete;
+
 }

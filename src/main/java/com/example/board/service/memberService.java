@@ -22,8 +22,9 @@ public class memberService {
 
     public memberEntity add(memberRequest request) {
         memberEntity memberEntity = new memberEntity();
+        memberEntity.setMemberIdx(request.getMemberIdx());
         memberEntity.setMemberName(request.getMemberName());
-        memberEntity.setMemberPw(request.getMemberPw());
+        memberEntity.setMemberIP(request.getMemberIP());
 
         return this.memberRepository.save(memberEntity);
     }
@@ -41,11 +42,14 @@ public class memberService {
     //    4	todo 리스트 목록 중 특정 아이템을 수정
     public memberEntity updateById(Integer idx, memberRequest request) {
         memberEntity memberEntity = this.searchById(idx);
+        if(request.getMemberIdx() != null) {
+            memberEntity.setMemberIdx(request.getMemberIdx());
+        }
         if(request.getMemberName() != null) {
             memberEntity.setMemberName(request.getMemberName());
         }
-        if(request.getMemberPw() != null) {
-            memberEntity.setMemberPw(request.getMemberPw());
+        if(request.getMemberIP() != null) {
+            memberEntity.setMemberIP(request.getMemberIP());
         }
         return this.memberRepository.save(memberEntity);
     }

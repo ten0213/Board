@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class memberRequest {
 
-    private int memberId;
+    private Integer memberIdx;
 
     private String memberName;
 
-    private String memberPw;
+    private String memberIP;
 }

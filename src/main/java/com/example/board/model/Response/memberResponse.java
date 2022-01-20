@@ -9,17 +9,17 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class memberResponse {
-    private int memberId;
+    private Integer memberIdx;
     private String memberName;
     private String memberPw;
     private String memberUrl;
 
 
     public memberResponse(memberEntity memberentity) {
-        this.memberId = memberentity.getMemberId();
+        this.memberIdx = memberentity.getMemberIdx();
         this.memberName = memberentity.getMemberName();
-        this.memberPw = memberentity.getMemberPw();
+        this.memberPw = memberentity.getMemberIP();
 
-        this.memberUrl = "http://localhost:8080/" + this.memberId;
+        this.memberUrl = "http://localhost:8080/" + this.memberIdx;
     }
 }

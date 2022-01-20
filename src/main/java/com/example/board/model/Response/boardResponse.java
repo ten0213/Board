@@ -4,35 +4,35 @@ package com.example.board.model.Response;
 import com.example.board.model.Entity.boardEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class boardResponse {
 
-    private Long boardIdx;
+    private Integer boardIdx;
     private String boardTitle;
-    private String createDt;
-    private String updateDt;
-    private String boardContent;
-    private int memberNo;
-    private int commentNo;
-    private int attachmentNo;
-    private Boolean isDelete;
-    private String writer;
+    private LocalDateTime createDt;
+    private LocalDateTime updateDt;
+    private String boardContents;
+    private Boolean boardIsDelete;
+    private Integer memberIdx;
+    private Integer commentIdx;
+    private Integer attachmentIdx;
+
     private String boardUrl;
 
     public boardResponse(boardEntity boardentity) {
-        this.boardIdx = (long) boardentity.getBoardIdx();
+        this.boardIdx = boardentity.getBoardIdx();
         this.boardTitle = boardentity.getBoardTitle();
-        this.createDt = String.valueOf(boardentity.getCreateDt());
-        this.updateDt = String.valueOf(boardentity.getUpdateDt());
-        this.boardContent = boardentity.getBoardContent();
-        this.memberNo = boardentity.getMemberIdx();
-        this.commentNo = Integer.parseInt(boardentity.getCommentIdx());
-        this.attachmentNo = Integer.parseInt(boardentity.getAttachmentIdx());
-        this.isDelete = Boolean.parseBoolean(String.valueOf(boardentity.getIsDelete()));
-        this.writer = boardentity.getWriter();
+        this.createDt = boardentity.getCreateDt();
+        this.updateDt = boardentity.getUpdateDt();
+        this.boardContents = boardentity.getBoardContents();
+        this.boardIsDelete = boardentity.getBoardIsDelete();
+
         this.boardUrl = "http://localhost:8080/" + this.boardIdx;
     }
 

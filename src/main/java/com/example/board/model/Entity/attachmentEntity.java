@@ -1,7 +1,9 @@
 package com.example.board.model.Entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 import javax.persistence.*;
@@ -13,16 +15,18 @@ public class attachmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int attachmentId;
+    private int attachmentIdx;
 
     @Column(nullable = false)
     private String attachmentNickname;
 
     @Column(nullable = false)
-    private String attachmentPw;
+    private String attachmentLength;
 
     @Column(nullable = false)
-    private String attachmentContent;
+    private String attachmentUrl;
 
+    @Column(nullable = false)
+    private Boolean attachmentIsDelete;
 
 }

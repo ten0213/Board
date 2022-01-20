@@ -19,11 +19,12 @@ public class boardService {
     // 게시판 목록에 게시글을 추가
     public boardEntity add(boardRequest request) {
         boardEntity boardEntity = new boardEntity();
-        boardEntity.setBoardContent(request.getBoardContent());
-        boardEntity.setWriter(request.getWriter());
+        boardEntity.setBoardIdx(request.getBoardIdx());
+        boardEntity.setBoardContents(request.getBoardContents());
         boardEntity.setBoardTitle(request.getBoardTitle());
         boardEntity.setCreateDt(request.getCreateDt());
         boardEntity.setUpdateDt(request.getUpdateDt());
+        boardEntity.setBoardIsDelete(request.getBoardIsDelete());
 
         return this.boardRepository.save(boardEntity);
     }
@@ -39,17 +40,17 @@ public class boardService {
 
     public boardEntity updateById(Integer idx, boardRequest request) {
         boardEntity boardEntity = this.searchById(idx);
+        if(request.getBoardIdx() != null) {
+            boardEntity.setBoardIdx(request.getBoardIdx());
+        }
         if(request.getBoardTitle() != null) {
             boardEntity.setBoardTitle(request.getBoardTitle());
         }
 
-        if(request.getBoardContent() != null) {
-            boardEntity.setBoardContent(request.getBoardContent());
+        if(request.getBoardContents() != null) {
+            boardEntity.setBoardContents(request.getBoardContents());
         }
 
-        if(request.getWriter() != null) {
-            boardEntity.setWriter(request.getWriter());
-        }
         if(request.getCreateDt() != null) {
             boardEntity.setCreateDt(request.getCreateDt());
         }
@@ -58,12 +59,16 @@ public class boardService {
             boardEntity.setUpdateDt(request.getUpdateDt());
         }
 
+        if(request.getBoardIsDelete() != null) {
+            boardEntity.setBoardIsDelete(request.getBoardIsDelete());
+        }
+
         return this.boardRepository.save(boardEntity);
     }
 
     @Transactional
-    public List<boardEntity> deleteById(Integer id) {
-        this.boardRepository.deleteById(id);
+    public List<boardEntity> deleteById(Integer idx) {
+        this.boardRepository.deleteById(idx);
         return boardRepository.findAll();
     }
 

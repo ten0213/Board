@@ -11,19 +11,24 @@ import java.time.LocalDateTime;
 @Setter
 public class boardRequest {
 
-    private Long boardIdx;
+    private Integer boardIdx;
 
     private String boardTitle;
 
-    private String writer;
 
     private LocalDateTime createDt;
 
     private LocalDateTime updateDt;
 
-    private String boardContent;
+    private String boardContents;
 
-    private Boolean isDelete;
+    private Boolean boardIsDelete;
+
+    private Integer memberIdx;
+
+    private Integer commentIdx;
+
+    private Integer attachmentIdx;
 
 }
 

@@ -1,33 +1,18 @@
 package com.example.board.controller;
 
 import com.example.board.model.Entity.attachmentEntity;
-import com.example.board.model.Entity.memberEntity;
 import com.example.board.model.Request.attachmentRequest;
 import com.example.board.model.Response.attachmentResponse;
-import com.example.board.service.attachmentService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.ObjectName;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
-@CrossOrigin
-@AllArgsConstructor
-@Controller
 public class attachmentController {
 
-    private attachmentService attachmentservice;
+    private com.example.board.service.attachmentService attachmentService;
 
     @GetMapping(path = "/")
     public String attachment() {
@@ -37,53 +22,57 @@ public class attachmentController {
     @PostMapping
     public ResponseEntity<attachmentResponse> create(@RequestBody attachmentRequest request) {
         System.out.println("CREATE");
+
         if(ObjectUtils.isEmpty(request.getAttachmentNickname()))
             return ResponseEntity.badRequest().build();
 
-        if(ObjectUtils.isEmpty(request.getAttachmentPw()))
+        if(ObjectUtils.isEmpty(request.getAttachmentLength()))
             return ResponseEntity.badRequest().build();
 
-        if(ObjectUtils.isEmpty(request.getAttachmentContent()))
+        if(ObjectUtils.isEmpty(request.getAttachmentUrl()))
             return ResponseEntity.badRequest().build();
 
-        attachmentEntity result = this.attachmentservice.add(request);
+        if(ObjectUtils.isEmpty(request.getAttachmentIsDelete()))
+            request.setAttachmentIsDelete(false);
+
+        attachmentEntity result = this.attachmentService.add(request);
         return ResponseEntity.ok(new attachmentResponse(result));
     }
 
-    @GetMapping(path = "/attachment/{idx}")
+    @GetMapping
     public ResponseEntity<attachmentResponse> readOne(@PathVariable Integer idx) {
         System.out.println("READ ONE");
-        attachmentEntity result = this.attachmentservice.searchById(idx);
+        attachmentEntity result = this.attachmentService.searchById(idx);
         return ResponseEntity.ok(new attachmentResponse(result));
     }
 
-    @GetMapping(path = "/attachment")
+    @GetMapping
     public ResponseEntity<List<attachmentResponse>> readAll() {
         System.out.println("READ ALL");
-        List<attachmentEntity> list = this.attachmentservice.searchAll();
+        List<attachmentEntity> list = this.attachmentService.searchAll();
         List<attachmentResponse> response = list.stream().map(attachmentResponse::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping(path = "/attachment/{idx}")
+    @PatchMapping
     public ResponseEntity<attachmentEntity> update(@PathVariable Integer idx, @RequestBody attachmentRequest request) {
         System.out.println("UPDATE");
-        attachmentEntity result = this.attachmentservice.updateById(idx, request);
+        attachmentEntity result = this.attachmentService.updateById(idx, request);
         return ResponseEntity.ok(result);
     }
-    @DeleteMapping(path = "/attachment/{idx}")
+
+    @DeleteMapping
     public ResponseEntity<?> deleteOne(@PathVariable Integer idx) {
         System.out.println("DELETE ONE");
-        List<attachmentEntity> result = attachmentservice.deleteById(idx);
+        List<attachmentEntity> result = attachmentService.deleteById(idx);
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping(path = "/")
+    /*@DeleteMapping(path = "/")
     public ResponseEntity<?> deleteAll() {
         System.out.println("DELETE ALL");
-        this.attachmentservice.deleteAll();
+        this.attachmentService.deleteAll();
         return ResponseEntity.ok().build();
-    }
-
+    }*/
 }

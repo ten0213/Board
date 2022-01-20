@@ -15,34 +15,24 @@ import java.time.LocalDateTime;
 public class boardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private int boardIdx;
 
-    @Column(nullable = false)
+    @Column
     private String boardTitle;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime createDt;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime updateDt;
 
     @Column(nullable = false)
-    private String boardContent;
+    private String boardContents;
 
-    @Column(nullable = false)
-    private Boolean isDelete;
-
-    @Column(nullable = false)
-    private String writer;
-
-    @Column(nullable = false)
-    private int memberIdx;
-
-    @Column(nullable = false)
-    private String commentIdx;
-
-    @Column(nullable = false)
-    private String attachmentIdx;
+    @Column
+    private Boolean boardIsDelete;
+    
 
 
 }

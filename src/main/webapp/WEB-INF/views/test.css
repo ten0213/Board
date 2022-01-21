@@ -1,0 +1,9 @@
+.pagination > li > a {
+    display: block;
+    text-align: center;
+}
+
+.pagination {
+
+    float: none;
+}

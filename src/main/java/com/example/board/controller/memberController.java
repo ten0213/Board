@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,6 @@ public class memberController {
         memberEntity result = this.memberservice.updateById(idx, request);
         return ResponseEntity.ok(result);
     }
-
 
     public ResponseEntity<?> deleteOne(@PathVariable Integer idx) {
         System.out.println("DELETE ONE");

@@ -2,11 +2,15 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <title>게시판 메인 페이지</title>
+
+
     <script>
 
 
+        // element 생성하기
         function  createNewElement() {
             const boardList = document.getElementById("myBoardList").value;
             fetch("/", {
@@ -28,8 +32,6 @@
                 })
         }
 
-
-
         // 화면에 표현하기
         window.onload = function () {
             fetch("/board", {
@@ -42,8 +44,6 @@
                 .then((res) => initBoardList(res));
         }
 
-
-
         const initBoardList = (boardList) => {
             const list = document.getElementsByClassName("boardData");
             for(let i = 0; i <boardList.length; i++) {
@@ -51,8 +51,9 @@
                 list.appendChild(li);
             }
         }
-    </script>
 
+
+    </script>
 
 </head>
 <body>
@@ -85,7 +86,7 @@
     <div style="float:right">
         <button type="button" style="text-align:right">글쓰기</button>
     </div>
-
+<nav>
         <ul class="pagination modal">
             <li> <a href="#" class="first">처음 페이지</a></li>
             <li> <a href="#" class="arrow left"><<</a></li>
@@ -101,6 +102,7 @@
             <li> <a href="#" class="arrow right">>></a></li>
             <li><a href="#" class="last">끝 페이지</a></li>
         </ul>
+</nav>
     </div>
 </body>
 

@@ -5,19 +5,15 @@ import com.example.board.model.Request.boardRequest;
 import com.example.board.model.Response.boardResponse;
 import com.example.board.service.boardService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
-@Getter
-@Setter
+
 @CrossOrigin
 @AllArgsConstructor
 @Controller

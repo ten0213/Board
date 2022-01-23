@@ -13,7 +13,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -56,13 +55,13 @@ public class commentController {
     }
 
 
-    public ResponseEntity<List<commentResponse>> readAll() {
+
         System.out.println("READ ALL");
         List<commentEntity> list = this.commentService.searchAll();
         List<commentResponse> response = list.stream().map(commentResponse::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
-    }
+
 
 
     public ResponseEntity<commentEntity> update(@PathVariable Integer idx, @RequestBody commentRequest request) {

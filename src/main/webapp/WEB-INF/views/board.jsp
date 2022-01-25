@@ -2,13 +2,56 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="test.css">
     <meta charset="UTF-8">
     <title>게시판 메인 페이지</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        thead {
+            background-color: lightgrey;
+        }
+        td, th {
+            border: 1px solid lightgray;
+            text-align: left;
+            padding: 8px;
+        }
 
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .center {
+            text-align: center;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+    </style>
     <script>
-
 
         // element 생성하기
         function  createNewElement() {
@@ -58,9 +101,8 @@
 </head>
 <body>
 <h2 style="text-align: center">게시판 메인 페이지</h2><br>
-<div class="container">
-    <table class="table table-hover">
-        <thead>
+    <table>
+        <thead id="thead">
         <tr>
             <th>번호</th>
             <th>제목</th>
@@ -68,7 +110,7 @@
             <th>날짜</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         <tr>
             <td>2</td>
             <td>안녕하세요</td>
@@ -83,27 +125,24 @@
         </tr>
         </tbody>
     </table>
-    <div style="float:right">
+    <div style="float:right"><br>
         <button type="button" style="text-align:right">글쓰기</button>
+    </div><br><br><br>
+
+<div class="center">
+<div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#"><</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">></a>
+    <a href="#">&raquo;</a>
     </div>
-<nav>
-        <ul class="pagination modal">
-            <li> <a href="#" class="first">처음 페이지</a></li>
-            <li> <a href="#" class="arrow left"><<</a></li>
-            <li> <a href="#" class="active num">1</a></li>
-            <li> <a href="#" class="num">2</a></li>
-            <li> <a href="#" class="num">3</a></li>
-            <li> <a href="#" class="num">4</a></li>
-            <li> <a href="#" class="num">5</a></li>
-            <li> <a href="#" class="num">6</a></li>
-            <li> <a href="#" class="num">7</a></li>
-            <li> <a href="#" class="num">8</a></li>
-            <li> <a href="#" class="num">9</a></li>
-            <li> <a href="#" class="arrow right">>></a></li>
-            <li><a href="#" class="last">끝 페이지</a></li>
-        </ul>
-</nav>
-    </div>
+</div>
 </body>
 
 <ul id="boardData"></ul>

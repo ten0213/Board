@@ -58,7 +58,7 @@
     </style>
     <script>
 
-        // element 생성하기
+        /*// element 생성하기
         function  createNewElement() {
             const boardList = document.getElementById("myBoardList").value;
             fetch("/", {
@@ -98,7 +98,7 @@
                 const li = document.createElement("li");
                 list.appendChild(li);
             }
-        }
+        }*/
 
 
     </script>
@@ -130,9 +130,10 @@
         </tr>
         </tbody>
     </table>
-    <div style="float:right"><br>
-        <button type="button" style="text-align:right">글쓰기</button>
-    </div><br><br><br>
+    <div style="float:right">
+        <button type="button" class="navyBtn" onclick="location.href='writablePage.jsp'">글쓰기</button>
+
+    </div><br><br>
 
 <div class="center">
 <div class="pagination">

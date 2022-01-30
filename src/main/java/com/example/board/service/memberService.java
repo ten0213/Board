@@ -33,13 +33,12 @@ public class memberService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
     }
-    //    3	todo 리스트 전체 목록을 조회
 
 
     public List<memberEntity> searchAll() {
         return this.memberRepository.findAll();
     }
-    //    4	todo 리스트 목록 중 특정 아이템을 수정
+
     public memberEntity updateById(Integer idx, memberRequest request) {
         memberEntity memberEntity = this.searchById(idx);
         if(request.getMemberIdx() != null) {
@@ -55,13 +54,12 @@ public class memberService {
     }
 
 
-    //    5	todo 리스트 목록 중 특정 아이템을 삭제
     @Transactional
     public List<memberEntity> deleteById(Integer idx) {
         this.memberRepository.deleteById(idx);
         return memberRepository.findAll();
     }
-    //    6	todo 리스트 전체 목록을 삭제
+
     public void deleteAll() {
         this.memberRepository.deleteAll();
     }

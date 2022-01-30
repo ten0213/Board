@@ -1,6 +1,7 @@
 package com.example.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.board.model.Entity.boardEntity;
 import com.example.board.model.Request.boardRequest;
@@ -72,7 +73,10 @@ public class boardService {
         return boardRepository.findAll();
     }
 
-    public void deleteAll() {
+  /*  public void deleteAll() {
         this.boardRepository.deleteAll();
-    }
+    }*/
+
+
+
 }

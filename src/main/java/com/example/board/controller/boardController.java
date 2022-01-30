@@ -10,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
@@ -19,6 +23,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Controller
 public class boardController {
+
+
 
     private boardService boardservice;
 
@@ -81,6 +87,11 @@ public class boardController {
         System.out.println("DELETE ONE");
         List<boardEntity> result = boardservice.deleteById(idx);
         return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value="/board/boardWrite")
+    public String boardWrite() throws Exception {
+        return "/board/boardWrite";
     }
 
 }

@@ -10,9 +10,11 @@ import lombok.*;
 @Setter
 public class attachmentRequest {
 
-    private int attachmentIdx;
+    private Integer attachmentIdx;
 
     private String attachmentNickname;
+
+    private String attachmentPath;
 
     private String attachmentLength;
 

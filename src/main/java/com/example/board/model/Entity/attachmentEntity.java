@@ -29,4 +29,7 @@ public class attachmentEntity {
     @Column(nullable = false)
     private Boolean attachmentIsDelete;
 
+    @Column(nullable = false)
+    private String attachmentPath;
+
 }

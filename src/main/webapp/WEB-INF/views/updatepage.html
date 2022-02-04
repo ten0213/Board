@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+</head>
+<body>
+<h2 style="text-align: center">게시글 수정하기</h2>
+
+
+<form style="text-align: center">
+    글제목
+    <label>
+        <input type="text" name="boardTitle" value="게시판 운영 시작" size="82" style="text-align: center">
+    </label><br><br>
+    작성자
+    <label>
+        <input type="text" name="writer" value="관리자" size="82" style="text-align: center">
+    </label><br><br>
+    작성일자
+    <label>
+        <input type="text" name="createDT" value="2022-01-22" size="80" style="text-align: center">
+    </label><br><br>
+    <label>
+        <textarea name="boardContent" rows="30" cols="100">내용</textarea>
+    </label><br><br>
+
+</form>
+</body>
+<form>
+    <input type="file" name="file" accept="image/png, image/jpg, video/mp4" style="text-align:center" multiple><br><br>
+    <input type="submit" value="취소" style="margin-right: 20px"> &nbsp;&nbsp;&nbsp;<input value="등록" type="submit" onclick="alert('수정 처리 완료되었습니다!')" style="margin-right: auto">
+</form>
+
+</html>

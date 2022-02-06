@@ -90,6 +90,7 @@
                     <br/>
                     <input type="submit" value="작성" style="float: right;">
                 </form>
+            </td></tr>
 
     </table>
 

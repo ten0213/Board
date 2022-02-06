@@ -131,7 +131,7 @@
         </tbody>
     </table>
     <div style="float:right">
-        <button type="button" class="navyBtn" onclick="location.href='writablePage.jsp'">글쓰기</button>
+        <button type="button" class="navyBtn" onclick="location.href='writablepage.jsp'">글쓰기</button>
 
     </div><br><br>
 

@@ -88,9 +88,9 @@ public class boardController {
         return ResponseEntity.ok(result);
     }
 
-    @RequestMapping(value="/board/boardWrite")
+    @RequestMapping(value="/boardWrite")
     public String boardWrite() throws Exception {
-        return "/board/boardWrite";
+        return "/boardWrite";
     }
 
 }

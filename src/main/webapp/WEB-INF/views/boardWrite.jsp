@@ -62,7 +62,7 @@
         }
     }
 
-    /** 게시판 - 작성 콜백 함수 */
+    /* 게시판 - 작성 콜백 함수 */
     function insertBoardCallback(obj){
 
         if(obj != null){
@@ -95,8 +95,8 @@
         const video = document.getElementById("video");
         inputFile.addEventListener("change", function () {
             const file = inputFile.files[0];
-            const videourl = URL.createObjectURL(file);
-            video.setAttribute("src", videourl);
+            const videoUrl = URL.createObjectURL(file);
+            video.setAttribute("src", videoUrl);
             video.play();
         })
     }

@@ -16,7 +16,7 @@ public class attachmentController {
 
     @GetMapping(path = "/")
     public String attachment() {
-        return "attachment";
+        return "/attachment";
     }
 
     @PostMapping

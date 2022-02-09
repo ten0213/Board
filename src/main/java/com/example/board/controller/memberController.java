@@ -73,11 +73,5 @@ public class memberController {
         return ResponseEntity.ok(result);
     }
 
-    /*@DeleteMapping(path = "/")
-    public ResponseEntity<?> deleteAll() {
-        System.out.println("DELETE ALL");
-        this.memberservice.deleteAll();
-        return ResponseEntity.ok().build();
-    }*/
 
 }

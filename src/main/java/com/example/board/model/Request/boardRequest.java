@@ -2,6 +2,7 @@ package com.example.board.model.Request;
 
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -16,9 +17,9 @@ public class boardRequest {
     private String boardTitle;
 
 
-    private LocalDateTime createDt;
+    private Timestamp createDt;
 
-    private LocalDateTime updateDt;
+    private Timestamp updateDt;
 
     private String boardContents;
 
@@ -29,6 +30,8 @@ public class boardRequest {
     private Integer commentIdx;
 
     private Integer attachmentIdx;
+
+    private String memberName;
 
 }
 

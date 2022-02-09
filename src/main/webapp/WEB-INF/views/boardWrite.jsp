@@ -8,14 +8,14 @@
 <script>
     /** 게시판 - 목록 페이지 이동 */
     function goBoardList(){
-        location.href = "/board/boardList";
+        location.href = "/";
     }
 
-    /** 게시판 - 작성  */
-    function insertBoard(){
-        var boardTitle = $("#board_title").val(); //게시글 제목
-        var boardContent = $("#board_contents").val(); //게시글 내용
-        var userName = $("#board_writer").val(); //작성자
+    /* 게시판 작성 함수  */
+    function insertBoard() {
+        const boardTitle = $("#board_title").val(); //게시글 제목
+        const boardContent = $("#board_contents").val(); //게시글 내용
+        const userName = $("#member_name").val(); //작성자
 
 
         if (boardTitle === ""){
@@ -38,17 +38,18 @@
 
 
 
+
         var yn = confirm("게시글을 등록하시겠습니까?");
         if(yn){
 
-            var filesChk = $("input[name='files[0]']").val();
+            let filesChk = $("input[name='files[0]']").val();
             if(filesChk === ""){
                 $("input[name='file[0]']").remove();
             }
 
             $("#boardForm").ajax({
 
-                url        : "/board/createBoard",
+                url        : "/board/boardWrite",
                 enctype    : "multipart/form-data",
                 cache   : false,
                 async   : true,
@@ -56,18 +57,17 @@
                 success : function(obj) {
                     insertBoardCallback(obj);
                 },
-                error     : function(xhr, status, error) {}
-
+                error : function (xhr, status, error) {}
             }).submit();
         }
     }
 
-    /* 게시판 - 작성 콜백 함수 */
-    function insertBoardCallback(obj){
+    /* 게시판 -  callback */
+    function insertBoardCallback(obj) {
 
         if(obj != null){
 
-            var result = obj.result;
+            let result = obj.result;
 
             if(result === "SUCCESS"){
                 alert("게시글 등록을 성공하였습니다.");
@@ -83,7 +83,7 @@
     function checkFile(el) {
 
 
-        var file = el.files;
+        let file = el.files;
 
 
         if (file[0].size > 1024 * 1024 * 30) {
@@ -100,7 +100,14 @@
             video.play();
         })
     }
-
+    function btn_cancel(){
+        if (confirm("게시글 작성을 취소하시겠습니까?")) {
+            {
+                alert("게시글 작성이 취소되었습니다.");
+                goBoardList();
+            }
+        }
+    }
 
 </script>
 <style>
@@ -132,23 +139,23 @@
     <div id="container">
         <div class="inner">
             <h1>게시글 작성</h1>
-            <form id="boardForm" name="boardForm" action="/board/createboard" enctype="multipart/form-data" method="post" onsubmit="return false;">
-                작성자: <input type="text" name="userName">
+            <form id="boardForm" name="boardForm" enctype="multipart/form-data" method="post" onsubmit="return false;">
+                작성자: <input type="text" name="board_writer">
             </form>
-            <br><br>
-            제목: <input type="text" name="boardTitle">
+            <br>
+            제목: <input type="text" name="board_title">
             <br><br> 내용: <Br>
-            <textarea name="boardContent" rows="30" cols="100"></textarea>
+            <textarea name="board_contents" rows="30" cols="100"></textarea>
             <br><br>
-            <form method enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <div>
                     <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)">
                 </div>
             </form>
             <form action="board.jsp" method="get">
-            <button type="button" onclick="goBoardList()">취소</button>
+            <button type="button" class="create_button_cancel" onclick="btn_cancel()">취소</button>
         </form>
-            <button type="button" class="btn black" onclick="insertBoard();">등록</button>
+            <button type="button" class="create_button_upload" onclick="insertBoard();">등록</button>
         </div>
     </div>
 </div>

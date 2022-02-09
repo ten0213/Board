@@ -182,15 +182,11 @@
             datetime: "2022-01-23"
         }
     ]
+
     function goBoardDetail(boardNo){
         location.href = "/board/boardDetail?boardNo="+ boardNo;
     }
 
-    /* 게시판 - 게시글 검색 */
-
-    function getSearchByUserName(userName){
-        location.href = "/boardlist?userName="+ userName;
-    }
 
     /** 게시판 - 작성 페이지 이동 */
     function goBoardWrite(){
@@ -201,8 +197,7 @@
     function getBoardList(){
         $.ajax({
 
-            url        :"/boardList",
-            //serialize - 데이터를 보내기 위해 form요소 집합을 문자열로 인코딩
+            url        :"/board",
             data    : $("#boardForm").serialize(),
             dataType:"JSON",
             cache   : false,
@@ -225,7 +220,6 @@
             var data = obj.data; // 데이터베이스 data
             var list = data.list;// 데이터베이스 data의 list
             var listLen = list.length;// 데이터베이스 data의 list의 length
-            var pagination = data.pagination;
 
             var str = "";
 
@@ -260,7 +254,6 @@
             }
 
             $("#tbody").html(str);
-            $("#pagination").html(pagination);
 
         } else {
             alert("관리자에게 문의하세요.");

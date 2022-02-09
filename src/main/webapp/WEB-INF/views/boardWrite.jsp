@@ -86,10 +86,10 @@
         var file = el.files;
 
 
-        if (file[0].size > 1024 * 1024 * 50) {
+        if (file[0].size > 1024 * 1024 * 30) {
 
 
-            alert('50MB 이하 파일만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + (Math.round(file[0].size / 1024 / 1024 * 100) / 100) + 'MB');
+            alert('30MB 이하 파일만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + (Math.round(file[0].size / 1024 / 1024 * 100) / 100) + 'MB');
         }
         const inputFile = document.getElementById("files");
         const video = document.getElementById("video");

@@ -6,6 +6,7 @@ import com.example.board.model.Response.boardResponse;
 import com.example.board.service.boardService;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -25,15 +28,19 @@ import java.util.stream.Collectors;
 public class boardController {
 
 
-
     private boardService boardservice;
 
+    @RequestMapping(value = "/board/boardList") //게시글 목록
+    public String boardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "mainpage";
+    }
     @GetMapping(path = "/")
     public String board() {
         return "board";
     }
 
-    @PostMapping
+    @PostMapping(path = "/board/createBoard")
     public ResponseEntity<boardResponse> create(@RequestBody boardRequest request) {
         System.out.println("CREATE");
 
@@ -75,12 +82,12 @@ public class boardController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping(path = "/board/{idx}")
-    public ResponseEntity<boardEntity> update(@PathVariable Integer idx, @RequestBody boardRequest request) {
-        System.out.println("UPDATE");
-        boardEntity result = this.boardservice.updateById(idx, request);
-        return ResponseEntity.ok(result);
+    @RequestMapping("/boardUpdate?boardNo={boardNo}")
+    public String update(HttpServletRequest request, HttpServletResponse response, @PathVariable String boardNo) throws Exception {
+
+        return "updatepage";
     }
+
 
     @DeleteMapping(path = "/board/{idx}")
     public ResponseEntity<?> deleteOne(@PathVariable Integer idx) {

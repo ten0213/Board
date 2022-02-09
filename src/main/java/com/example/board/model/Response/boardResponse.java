@@ -4,6 +4,8 @@ package com.example.board.model.Response;
 import com.example.board.model.Entity.boardEntity;
 import lombok.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,8 +17,8 @@ public class boardResponse {
 
     private Integer boardIdx;
     private String boardTitle;
-    private LocalDateTime createDt;
-    private LocalDateTime updateDt;
+    private Timestamp createDt;
+    private Timestamp updateDt;
     private String boardContents;
     private Boolean boardIsDelete;
     private Integer memberIdx;

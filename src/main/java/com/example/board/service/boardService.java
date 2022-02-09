@@ -73,10 +73,6 @@ public class boardService {
         return boardRepository.findAll();
     }
 
-
-    public void deleteAll() {
-        this.boardRepository.deleteAll();
-    }
 }
 
 

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 수정시 본인확인 페이지</title>
+</head>
+<h2>본인확인(수정)</h2>
+<body>
+작성자:
+<br>
+비밀번호 입력:
+<input type="text" name="userPassword" value="비밀번호"><br><br>
+<input type="submit" onclick="goBoardList()" value="취소">
+<form action="identification_update.jsp" method="get">
+    <input type="submit" value="확인">
+</form>
+</body>
+</html>
